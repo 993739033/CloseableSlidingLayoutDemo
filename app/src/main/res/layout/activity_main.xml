@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project.scode.com.closeableslidinglayoutdemo.ClosableSlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout"
+    tools:context="project.scode.com.closeableslidinglayoutdemo.MainActivity">
+    <LinearLayout
+        android:id="@+id/layout_2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFD700"
+            android:text="Hello World!"
+           />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FF4500"
+            android:text="Hello World!"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#EE4000"
+            android:text="Hello World!"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#DC143C"
+
+            android:text="Hello World!"
+            />
+    </LinearLayout>
+
+
+</project.scode.com.closeableslidinglayoutdemo.ClosableSlidingLayout>
