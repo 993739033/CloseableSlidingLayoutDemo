@@ -6,8 +6,9 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
-    ClosableSlidingLayout layout;
+    CloseableView layout;
     View layout_2;
+    View layout_show;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +16,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         layout = findViewById(R.id.layout);
         layout_2 = findViewById(R.id.layout_2);
-        layout.mTarget = layout_2;
+        layout_show = findViewById(R.id.layout_show);
+        layout_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new BottomSheetDialog(MainActivity.this).show();
+            }
+        });
     }
 }

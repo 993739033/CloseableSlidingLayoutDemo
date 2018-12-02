@@ -6,41 +6,38 @@
     android:layout_height="match_parent"
     android:id="@+id/layout"
     tools:context="project.scode.com.closeableslidinglayoutdemo.MainActivity">
+    <project.scode.com.closeableslidinglayoutdemo.BlurImageView
+        android:id="@+id/bg"
+        android:background="@drawable/meizi"
+        android:layout_width="240dp"
+        android:layout_height="200dp" />
     <LinearLayout
+        android:background="@android:color/transparent"
         android:id="@+id/layout_2"
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="240dp"
+        android:layout_height="240dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#FFD700"
-            android:text="Hello World!"
-           />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#FF4500"
             android:text="Hello World!"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#EE4000"
             android:text="Hello World!"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="#DC143C"
+            android:text="Hello World!"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Hello World!"
+            />
 
-            android:text="Hello World!"
-            />
-        <project.scode.com.closeableslidinglayoutdemo.BlurImageView
-            android:id="@+id/layout_show"
-            android:background="@drawable/meizi"
-            android:layout_width="240dp"
-            android:layout_height="200dp" />
     </LinearLayout>
 
 

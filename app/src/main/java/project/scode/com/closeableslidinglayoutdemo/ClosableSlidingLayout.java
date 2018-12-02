@@ -217,10 +217,10 @@ class ClosableSlidingLayout extends FrameLayout {
             }
         }
 
-        @Override
-        public int clampViewPositionVertical(View child, int top, int dy) {//竖直拖拽时回调
-            return Math.max(top, ClosableSlidingLayout.this.top);//返回实际滑动的数值 此处可做滑动范围限制
-        }
+            @Override
+            public int clampViewPositionVertical(View child, int top, int dy) {//竖直拖拽时回调
+                return Math.max(top, ClosableSlidingLayout.this.top);//返回实际滑动的数值 此处可做滑动范围限制
+            }
     }
 
 }
