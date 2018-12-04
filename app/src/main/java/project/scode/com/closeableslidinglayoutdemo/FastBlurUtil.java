@@ -2,6 +2,7 @@ package project.scode.com.closeableslidinglayoutdemo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
@@ -251,8 +252,7 @@ public class FastBlurUtil {
             }
         }
 
-        bitmap.setPixels(pix, 0, w, 0, 0, w, h);
-
+            bitmap.setPixels(pix, 0, w, 0, 0, w, h);
         return (bitmap);
     }
 

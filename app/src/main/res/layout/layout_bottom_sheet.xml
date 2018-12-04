@@ -2,43 +2,23 @@
 <project.scode.com.closeableslidinglayoutdemo.CloseableView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context="project.scode.com.closeableslidinglayoutdemo.MainActivity">
+
     <project.scode.com.closeableslidinglayoutdemo.BlurImageView
         android:id="@+id/bg"
-        android:background="@drawable/meizi"
-        android:layout_width="240dp"
-        android:layout_height="200dp" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/meizi" />
+
     <LinearLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:id="@+id/layout_2"
-        android:orientation="vertical"
-        android:layout_width="240dp"
-        android:layout_height="240dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Hello World!"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Hello World!"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Hello World!"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Hello World!"
-            />
+        android:orientation="vertical">
 
     </LinearLayout>
-
-
 </project.scode.com.closeableslidinglayoutdemo.CloseableView>

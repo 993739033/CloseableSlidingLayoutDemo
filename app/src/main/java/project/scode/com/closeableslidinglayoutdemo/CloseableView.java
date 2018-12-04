@@ -14,10 +14,10 @@ import android.widget.FrameLayout;
 /**
  * Created by Administrator on 2018/12/2.
  */
-
+//能够滑动
 public class CloseableView extends FrameLayout {
     private ViewDragHelper mDragHelper;
-    private int Drag_Up_MAX = 200;
+    private int Drag_Up_MAX = 200;//向上滑动的最大值
     private float Min_Speed;
     private int height;
     private int top;
@@ -56,8 +56,8 @@ public class CloseableView extends FrameLayout {
             ViewCompat.postInvalidateOnAnimation(this);
         }
         if (mListener != null) {
-            int h = getChildAt(0).getTop();
-            mListener.onDragProgress(height-top);
+            int h = getChildAt(1).getTop();
+            mListener.onDragProgress(height-h);
         }
     }
 
@@ -132,7 +132,6 @@ public class CloseableView extends FrameLayout {
             }
         }
     }
-
 
     /**
      * set listener

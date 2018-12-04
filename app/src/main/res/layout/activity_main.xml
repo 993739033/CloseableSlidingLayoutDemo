@@ -6,12 +6,17 @@
     android:layout_height="match_parent"
     android:id="@+id/layout"
     tools:context="project.scode.com.closeableslidinglayoutdemo.MainActivity">
-    <LinearLayout
-        android:id="@+id/layout_2"
+    <RelativeLayout
+        android:id="@+id/layout_content"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/tv_1"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#FFD700"
@@ -36,12 +41,14 @@
 
             android:text="Hello World!"
             />
-        <project.scode.com.closeableslidinglayoutdemo.BlurImageView
+        </LinearLayout>
+        <ImageView
+            android:layout_alignParentBottom="true"
             android:id="@+id/layout_show"
-            android:background="@drawable/meizi"
-            android:layout_width="240dp"
-            android:layout_height="200dp" />
-    </LinearLayout>
+            android:background="@drawable/meizi2"
+            android:layout_width="match_parent"
+            android:layout_height="280dp" />
+    </RelativeLayout>
 
 
 </project.scode.com.closeableslidinglayoutdemo.CloseableView>
