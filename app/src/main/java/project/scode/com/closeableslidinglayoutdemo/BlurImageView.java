@@ -57,7 +57,6 @@ public class BlurImageView extends android.support.v7.widget.AppCompatImageView 
     }
 
     private void initView() {
-
     }
 
     //初始化blurBitmap 通过传入的bg图片
@@ -132,6 +131,7 @@ public class BlurImageView extends android.support.v7.widget.AppCompatImageView 
                 }
             }).start();
         }
+        Log.d("cuth", "onDraw: " + Cut_H);
         int drawTop = (getMeasuredHeight() - Cut_H) < 0 ? 0 : getMeasuredHeight() - Cut_H;
         Bitmap blur = getBg();
         try {

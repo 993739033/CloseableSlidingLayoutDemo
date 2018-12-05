@@ -10,7 +10,7 @@ import android.view.View;
 
 public class MainActivity extends Activity {
 
-    CloseableView layout;
+    View layout;
     View layout_2;
     View layout_show;
     BottomSheetDialog dialog;

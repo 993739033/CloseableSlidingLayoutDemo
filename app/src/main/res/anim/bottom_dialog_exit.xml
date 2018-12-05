@@ -7,7 +7,7 @@
         <!--android:startOffset="100"-->
         <!--android:toYDelta="100%" />-->
     <alpha
-        android:duration="250"
+        android:duration="1000"
         android:fromAlpha="1"
         android:toAlpha="0.8"
         />

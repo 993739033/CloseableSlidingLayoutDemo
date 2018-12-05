@@ -2,6 +2,7 @@ package project.scode.com.closeableslidinglayoutdemo;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -23,10 +24,12 @@ import android.widget.LinearLayout;
 
 public class BottomSheetDialog extends Dialog {
     BlurImageView bg;
+    CloseableView mDialogView;
     Bitmap bgBitmap;
     Context mContext;
     int BlurRadius = 10;//高斯模糊半径 越大越模糊 默认为10
     int layout_id;
+    boolean isClosed = false;
 
     public BottomSheetDialog setBlurRadius(int blurRadius) {
         BlurRadius = blurRadius;
@@ -92,9 +95,30 @@ public class BottomSheetDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         initWindow();
         initView(getContext());
+        initListener();
+    }
+    private void initListener() {
+        mDialogView.setSlideListener(new CloseableView.SlideListener() {
+            @Override
+            public void onClosed() {
+                if (isShowing()) {
+                    BottomSheetDialog.this.dismiss();
+                }
+            }
+
+            @Override
+            public void onOpened() {
+
+            }
+
+            @Override
+            public void onDragProgress(int top) {
+                Log.d("top", "onDragProgress: " + top);
+                bg.setCut_H(top);
+            }
+        });
     }
 
     private void initWindow() {
@@ -108,7 +132,7 @@ public class BottomSheetDialog extends Dialog {
 
     private void initView(final Context context) {
         setCanceledOnTouchOutside(true);
-        final CloseableView mDialogView = (CloseableView) View.inflate(context, R.layout.layout_bottom_sheet, null);
+        mDialogView  = (CloseableView) View.inflate(context, R.layout.layout_bottom_sheet, null);
         View contentView = LayoutInflater.from(mContext).inflate(layout_id, null);
         bg = mDialogView.findViewById(R.id.bg);
         ((LinearLayout) mDialogView.findViewById(R.id.layout_content)).addView(contentView);
@@ -116,22 +140,20 @@ public class BottomSheetDialog extends Dialog {
             bg.setBg(bgBitmap);
         }
         bg.setBlurRadius(BlurRadius);
+        bg.setCut_H(0);
         setContentView(mDialogView);
-        mDialogView.setSlideListener(new CloseableView.SlideListener() {
-            @Override
-            public void onClosed() {
-                BottomSheetDialog.this.dismiss();
-            }
+        isClosed = false;
+    }
 
-            @Override
-            public void onOpened() {
-            }
 
-            @Override
-            public void onDragProgress(int top) {
-                Log.d("top", "onDragProgress: " + top);
-                bg.setCut_H(top);
-            }
-        });
+    @Override
+    public void dismiss() {
+        if (!isClosed){
+            isClosed = true;
+            mDialogView.hideAnim();
+        }else{
+            isClosed = false;
+            super.dismiss();
+        }
     }
 }
