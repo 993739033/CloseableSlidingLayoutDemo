@@ -1,2 +1,3 @@
 # CloseableSlidingLayoutDemo
-![image](https://github.com/user_name/project_name/blob/master/app/src/main/file_name/xxx.jpg)
+![image](https://github.com/993739033/CloseableSlidingLayoutDemo/CloseableSlidingLayoutDemo/app/src/assest/S81205-17085676(2).gif)
+
