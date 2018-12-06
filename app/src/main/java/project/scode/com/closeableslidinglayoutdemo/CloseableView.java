@@ -123,7 +123,6 @@ public class CloseableView extends FrameLayout {
         super.onLayout(changed, left, top, right, bottom);
         final View childView = getChildAt(1);
         if (childView != null) {
-            mDragHelper.captureChildView(childView, 0);
             childView.offsetTopAndBottom(height - 2);
         }
     }
