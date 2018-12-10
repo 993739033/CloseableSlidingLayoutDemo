@@ -1,11 +1,10 @@
 package project.scode.com.closeableslidinglayoutdemo;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +13,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -23,28 +23,42 @@ import android.widget.LinearLayout;
  */
 
 public class BottomSheetDialog extends Dialog {
-    BlurImageView bg;
+    BlurImageView bgImage;
     CloseableView mDialogView;
-    Bitmap bgBitmap;
+    Bitmap bgBitmap;//原背景图
+    Bitmap blurBitmap;
     Context mContext;
     int BlurRadius = 10;//高斯模糊半径 越大越模糊 默认为10
     int layout_id;
+    View layoutView;
     boolean isClosed = false;
+
+    public static String Tag = "Blur";
+
+    public Bitmap getBlurBitmap() {
+        return blurBitmap;
+    }
 
     public BottomSheetDialog setBlurRadius(int blurRadius) {
         BlurRadius = blurRadius;
         return this;
     }
 
-    public BottomSheetDialog setBg(Bitmap bitmap) {
+    public BottomSheetDialog setBgBitmap(Bitmap bitmap) {
         if (bitmap != null) {
             bgBitmap = bitmap;
+            transToBlurBitmap(bgBitmap);
         }
         return this;
     }
 
+    //为bitmap添加模糊效果
+    public void transToBlurBitmap(Bitmap bitmap) {
+        blurBitmap = FastBlurUtil.doBlur(bitmap, BlurRadius, false);
+    }
+
     public BottomSheetDialog(@NonNull Context context) {
-        this(context,0);
+        this(context, 0);
     }
 
     public BottomSheetDialog(@NonNull Context context, int themeResId) {
@@ -59,11 +73,22 @@ public class BottomSheetDialog extends Dialog {
 
     //绑定背景view  也可以只使用setBg 来设置背景图片  或者不使用则使用默认BlurImagview的背景图
     public BottomSheetDialog bindBgView(final View view) {
+        if (view == null) return this;
         view.post(new Runnable() {
             @Override
             public void run() {
-                final Bitmap bitmap = getBitmapFromView(view);
-                BottomSheetDialog.this.setBg(bitmap);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Bitmap bitmap = null;
+                            bitmap = getBitmapFromView(view);
+                            setBgBitmap(bitmap);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
             }
         });
         return this;
@@ -74,9 +99,20 @@ public class BottomSheetDialog extends Dialog {
         return this;
     }
 
+    public BottomSheetDialog inflateView(View view) {
+        this.layoutView = view;
+        return this;
+    }
+
+    public BottomSheetDialog build() {
+        initView(getContext());
+        return this;
+    }
+
 
     //获取view 的背景bitmap
-    public static Bitmap getBitmapFromView(View v) {
+    @SuppressLint("ResourceAsColor")
+    public static Bitmap getBitmapFromView(View v) throws Exception {
         Bitmap b = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.RGB_565);
         Canvas c = new Canvas(b);
         v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
@@ -85,7 +121,7 @@ public class BottomSheetDialog extends Dialog {
         if (bgDrawable != null)
             bgDrawable.draw(c);
         else
-            c.drawColor(Color.WHITE);
+            c.drawColor(R.color.transparent);
         // Draw view to canvas
         v.draw(c);
         return b;
@@ -99,6 +135,7 @@ public class BottomSheetDialog extends Dialog {
         initView(getContext());
         initListener();
     }
+
     private void initListener() {
         mDialogView.setSlideListener(new CloseableView.SlideListener() {
             @Override
@@ -109,14 +146,9 @@ public class BottomSheetDialog extends Dialog {
             }
 
             @Override
-            public void onOpened() {
-
-            }
-
-            @Override
             public void onDragProgress(int top) {
                 Log.d("top", "onDragProgress: " + top);
-                bg.setCut_H(top);
+                bgImage.setCut_H(top);
             }
         });
     }
@@ -132,26 +164,39 @@ public class BottomSheetDialog extends Dialog {
 
     private void initView(final Context context) {
         setCanceledOnTouchOutside(true);
-        mDialogView  = (CloseableView) View.inflate(context, R.layout.layout_bottom_sheet, null);
-        View contentView = LayoutInflater.from(mContext).inflate(layout_id, null);
-        bg = mDialogView.findViewById(R.id.bg);
-        ((LinearLayout) mDialogView.findViewById(R.id.layout_content)).addView(contentView);
-        if (bgBitmap != null) {
-            bg.setBg(bgBitmap);
+        mDialogView = (CloseableView) View.inflate(context, R.layout.layout_bottom_sheet, null);
+        View contentView = null;
+        //layout_id 与layoutView 不能同时使用
+        if (layout_id != 0) {
+            contentView = LayoutInflater.from(mContext).inflate(layout_id, null);
+        } else if (layoutView != null) {
+            contentView = layoutView;
         }
-        bg.setBlurRadius(BlurRadius);
-        bg.setCut_H(0);
+        if (contentView != null) {
+            if (contentView.getParent() != null) {
+                ((ViewGroup) contentView.getParent()).removeView(contentView);
+            }
+            ((LinearLayout) mDialogView.findViewById(R.id.layout_content)).addView(contentView);
+        }
+        bgImage = mDialogView.findViewById(R.id.bg);
+        bgImage.setBlurBitmap(blurBitmap);
+        bgImage.setBlurRadius(BlurRadius);
+        bgImage.BindDialog(this);
         setContentView(mDialogView);
+    }
+
+    @Override
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
         isClosed = false;
     }
 
-
     @Override
     public void dismiss() {
-        if (!isClosed){
+        if (!isClosed) {
             isClosed = true;
             mDialogView.hideAnim();
-        }else{
+        } else {
             isClosed = false;
             super.dismiss();
         }

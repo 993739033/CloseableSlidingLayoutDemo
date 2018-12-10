@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
+        android:visibility="gone"
         android:padding="20dp"
         android:id="@+id/layout_content"
         android:layout_width="match_parent"
@@ -11,34 +12,54 @@
         android:orientation="vertical">
 
         <TextView
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Hello World!" />
 
         <TextView
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Hello World!" />
 
         <TextView
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Hello World!" />
 
         <TextView
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Hello World!" />
 
         <TextView
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Hello World!" />
 
         <TextView
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="Hello World!" />
 
     </LinearLayout>
+    <TextView
+        android:textSize="15sp"
+        android:textColor="@android:color/white"
+        android:lineSpacingExtra="10dp"
+        android:padding="10dp"
+        android:text="       彼岸花，恶魔的温柔。民间传说中自愿投入地狱的花朵，被众魔遣回，但仍徘徊于黄泉路上，众魔不忍，遂同意让她开在此路上，给离开人界的冤魂们一个指引和安慰。雪白色与血红色的彼岸花共同代表死亡。传言曼陀罗华盛开于天堂之路，曼珠沙华布满在地狱之途。同是代表死亡，一个偏向于对死亡的另一种解释：新生；另一个偏向于对痛苦和悔恨的彷徨与徘徊：堕落。所以说地狱与天堂，仅有一线之隔。所谓天使与恶魔的区别，不过是颜色与背负的含义罢了。"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </android.support.constraint.ConstraintLayout>

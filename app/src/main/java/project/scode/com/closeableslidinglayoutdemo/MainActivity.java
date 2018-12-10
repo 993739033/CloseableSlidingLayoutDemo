@@ -13,6 +13,7 @@ public class MainActivity extends Activity {
     View layout;
     View layout_2;
     View layout_show;
+    View layout_content;
     BottomSheetDialog dialog;
 
     @Override
@@ -20,12 +21,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         layout = findViewById(R.id.layout);
+        layout_content = findViewById(R.id.layout_content);
         layout_2 = findViewById(R.id.layout_content);
         layout_show = findViewById(R.id.layout_show);
         dialog = new BottomSheetDialog(this, R.style.MyDialogStyleTransparent)
+                .setBlurRadius(20)
                 .inflateLayoutId(R.layout.layout_dialog_content)
-                .bindBgView(layout)//背景布局
-                .setBlurRadius(20);
+//                .inflateView(view)
+                .bindBgView(layout_content)
+                .build();//背景布局
+
+
         layout_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

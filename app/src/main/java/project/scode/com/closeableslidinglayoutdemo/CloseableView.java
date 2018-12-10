@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.Scroller;
 
 /**
  * Created by Administrator on 2018/12/2.
@@ -150,7 +149,6 @@ public class CloseableView extends FrameLayout {
      * Callback
      */
     private class ViewDragCallback extends ViewDragHelper.Callback {
-
         @Override
         public boolean tryCaptureView(View child, int pointerId) {
             if (child == CloseableView.this.getChildAt(1)) {
@@ -195,8 +193,6 @@ public class CloseableView extends FrameLayout {
      */
     interface SlideListener {
         void onClosed();
-
-        void onOpened();
 
         void onDragProgress(int top);
     }
